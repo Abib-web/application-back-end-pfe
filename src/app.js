@@ -1,13 +1,18 @@
 const express = require('express');
 const cors = require('cors');
-const dataRoutes = require('./routes/dataRoutes'); // Assure-toi que le chemin est correct
+const dataRoutes = require('./routes/dataRoutes'); 
 
 const app = express();
 
-// Middleware pour activer les CORS
-app.use(cors());
+// Middleware pour analyser les JSON
+app.use(express.json());
 
-// Routes pour accéder aux données
+// Middleware CORS : placer ceci AVANT vos routes
+app.use(cors({
+  origin: ['http://localhost:5173', 'http://576f-132-209-10-38.ngrok-free.app']
+}));
+
+// Vos routes
 app.use('/', dataRoutes);
 
 const PORT = 5000;

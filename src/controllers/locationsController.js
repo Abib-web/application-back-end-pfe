@@ -26,6 +26,10 @@ exports.getLocationById = async (req, res) => {
 exports.createLocation = async (req, res) => {
     try {
         const { name, city, region } = req.body;
+        if (!name || !city || !region) {
+            return res.status(400).json({ error: 'Missing required fields' });
+        }
+
         const result = await pool.query(
             'INSERT INTO Locations (name, city, region) VALUES ($1, $2, $3) RETURNING *',
             [name, city, region]
@@ -41,6 +45,10 @@ exports.updateLocation = async (req, res) => {
     try {
         const { id } = req.params;
         const { name, city, region } = req.body;
+        if (!name || !city || !region) {
+            return res.status(400).json({ error: 'Missing required fields' });
+        }
+
         const result = await pool.query(
             'UPDATE Locations SET name = $1, city = $2, region = $3 WHERE location_id = $4 RETURNING *',
             [name, city, region, id]
