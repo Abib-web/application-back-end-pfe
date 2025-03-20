@@ -8,9 +8,7 @@ const app = express();
 app.use(express.json());
 
 // Middleware CORS : placer ceci AVANT vos routes
-app.use(cors({
-  origin: ['http://localhost:5173', 'http://576f-132-209-10-38.ngrok-free.app']
-}));
+app.use(cors());
 
 // Vos routes
 app.use('/', dataRoutes);
